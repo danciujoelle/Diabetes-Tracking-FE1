@@ -1,0 +1,30 @@
+<ion-content>
+  <div class="main_content_div">
+    <ion-buttons slot="start" class="menu_btn">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <div class="user_div">
+      <div class="first_div">
+        <ion-label class="welcome">Welcome</ion-label>
+        <ion-label class="username">{{loggedUser.firstName}}</ion-label>
+      </div>
+      <div
+        class="user_back"
+        [style.backgroundImage]="'url(assets/joelle.jpg)'"
+      ></div>
+    </div>
+
+    <div class="content_div animated bounceInUp">
+      <ion-label class="hello_label">Please log your data</ion-label>
+      <ion-grid fixed>
+        <ion-col size="6" *ngFor="let log of options">
+          <div class="col_div" (click)="goToPage(log.route)">
+            <img src="{{log.img}}" />
+            <ion-label>{{log.name}}</ion-label>
+          </div>
+        </ion-col>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

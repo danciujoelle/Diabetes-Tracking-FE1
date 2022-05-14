@@ -1,0 +1,119 @@
+<ion-content>
+  <div class="header">
+    <h1>Diabetes Prediction</h1>
+  </div>
+  <form [formGroup]="predictionForm">
+    <ion-label position="relative">Pregnancies</ion-label>
+    <ion-input
+      formControlName="pregnancies"
+      type="number"
+      placeholder="Pregnancies"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.pregnancies.errors?.required"
+    >
+      Number of pregnancies is required.
+    </span>
+    <ion-label position="relative">Glucose</ion-label>
+    <ion-input
+      formControlName="glucose"
+      type="number"
+      placeholder="Plasma glucose concentration"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.glucose.errors?.required"
+    >
+      Number of plasma glucose concentration is required.
+    </span>
+    <ion-label position="relative">Blood pressure</ion-label>
+    <ion-input
+      formControlName="bloodPressure"
+      type="number"
+      placeholder="Diastolic blood pressure (mm Hg)"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.bloodPressure.errors?.required"
+    >
+      Blood pressure is required.
+    </span>
+    <ion-label position="relative">Skin thickness</ion-label>
+    <ion-input
+      formControlName="skinThickness"
+      type="number"
+      placeholder="Triceps skin fold thickess (mm)"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.skinThickness.errors?.required"
+    >
+      Skin thickness is required.
+    </span>
+    <ion-label position="relative">Insulin</ion-label>
+    <ion-input
+      formControlName="insulin"
+      type="number"
+      placeholder="2-Hour serum insulin (muU/ml)"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.insulin.errors?.required"
+    >
+      Insulin is required.
+    </span>
+    <ion-label position="relative">Weight</ion-label>
+    <ion-input
+      formControlName="weight"
+      type="number"
+      placeholder="Weigh in kg"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.weight.errors?.required"
+    >
+      Weight is required.
+    </span>
+    <ion-label position="relative">Height</ion-label>
+    <ion-input
+      formControlName="height"
+      type="number"
+      placeholder="Height in m"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.height.errors?.required"
+    >
+      Height is required.
+    </span>
+    <ion-label position="relative">Diabetes pedigree function</ion-label>
+    <ion-input
+      formControlName="pedigreeFunction"
+      type="number"
+      placeholder="Diabetes pedigree function"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.diabetesPedigreeFunction.errors?.required"
+    >
+      Diabetes pedigree function is required.
+    </span>
+    <ion-label position="relative">Age</ion-label>
+    <ion-input
+      formControlName="age"
+      type="number"
+      placeholder="Age"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.age.errors?.required"
+    >
+      Age is required.
+    </span>
+  </form>
+  <ion-button type="submit" (click)="onSubmit()">Sign Up</ion-button>
+  <div class="buttom">
+    <h3 routerLink="/login">Already have an account?<span>Login</span></h3>
+  </div>
+</ion-content>

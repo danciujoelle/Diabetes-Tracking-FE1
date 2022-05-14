@@ -1,0 +1,84 @@
+<ion-content>
+  <div class="header">
+    <h1>Diabetes Tracking</h1>
+    <h3>Happy to see you<br />Create new account</h3>
+  </div>
+  <form [formGroup]="submitForm">
+    <ion-label position="relative">First Name</ion-label>
+    <ion-input
+      formControlName="firstName"
+      type="text"
+      placeholder="First Name"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.firstName.errors?.required"
+    >
+      First name is required.
+    </span>
+    <ion-label position="relative">Last Name</ion-label>
+    <ion-input
+      formControlName="lastName"
+      type="text"
+      placeholder="Last Name"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.lastName.errors?.required"
+    >
+      Last name is required.
+    </span>
+    <ion-label position="relative">Email</ion-label>
+    <ion-input
+      formControlName="email"
+      type="email"
+      placeholder="Email"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.email.errors?.required"
+    >
+      Email is required.
+    </span>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.email.errors?.pattern"
+    >
+      Please provide valid email id.
+    </span>
+    <ion-label position="relative">Date of Birth</ion-label>
+    <ion-input
+      formControlName="dateOfBirth"
+      type="date"
+      max="todayDate"
+    ></ion-input>
+    <ion-label position="relative">Username</ion-label>
+    <ion-input
+      formControlName="username"
+      type="text"
+      placeholder="Username"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.username.errors?.required"
+    >
+      Username is required.
+    </span>
+    <ion-label position="relative">Password</ion-label>
+    <ion-input
+      formControlName="password"
+      type="password"
+      placeholder="Password"
+    ></ion-input>
+    <span
+      class="error ion-padding"
+      *ngIf="isSubmitted && errorControl.password.errors?.required"
+    >
+      Password is required.
+    </span>
+  </form>
+  <ion-button type="submit" (click)="onSubmit()">Sign Up</ion-button>
+  <div class="buttom">
+    <h3 routerLink="/login">Already have an account?<span>Login</span></h3>
+  </div>
+</ion-content>

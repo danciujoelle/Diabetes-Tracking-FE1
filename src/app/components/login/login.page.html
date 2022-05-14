@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="header">
+    <h1>Diabetes Tracking</h1>
+    <h3>Please Login<br />To Continue</h3>
+  </div>
+  <form [formGroup]="loginForm">
+    <ion-list>
+      <ion-label position="relative">Username</ion-label>
+      <ion-input
+        formControlName="username"
+        type="text"
+        placeholder="Username"
+      ></ion-input>
+      <ion-label position="relative">Password</ion-label>
+      <ion-input
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+      ></ion-input>
+    </ion-list>
+  </form>
+  <div class="button" type="submit" (click)="onSubmit()">Login</div>
+  <div class="buttom">
+    <h3>Don't have an account?</h3>
+    <span routerLink="/signup">Sign Up</span>
+  </div>
+</ion-content>
