@@ -45,15 +45,17 @@ export class HomePage implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       if(this.router.getCurrentNavigation().extras.state) {
         this.loggedUser = this.router.getCurrentNavigation().extras.state.user;
+        console.log(this.loggedUser);
       }
     });
     
   }
 
   goToPage(route: string): void {
+    console.log(this.loggedUser.userId);
     let navigationExtras: NavigationExtras = {
       state: {
-        userId: this.loggedUser.UserId
+        userId: this.loggedUser.userId
       }
     }
     this.router.navigate([route], navigationExtras);

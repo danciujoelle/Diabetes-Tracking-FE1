@@ -1,0 +1,43 @@
+ion-content {
+  --background: #ffde59;
+  border-left: 7px solid #1d1eb7;
+
+  .container-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ion-button {
+    float: right;
+    background-color: #ffde59;
+    --background: white;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  .title-container {
+    margin-bottom: 10px;
+  }
+
+  .description-container {
+    margin-bottom: 25px;
+  }
+}
+:host ::ng-deep {
+  .monthview-container {
+    height: 65% !important;
+  }
+
+  .event-detail-container {
+    display: none;
+  }
+}

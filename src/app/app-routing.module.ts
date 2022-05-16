@@ -27,6 +27,14 @@ const routes: Routes = [
     path: 'predict-diabetes',
     loadChildren: () => import('./components/predict-diabetes/predict-diabetes.module').then( m => m.PredictDiabetesPageModule)
   },
+  {
+    path: 'calendar',
+    loadChildren: () => import('./components/calendar/calendar.module').then( m => m.CalendarPageModule)
+  },
+  {
+    path: 'calendar-modal',
+    loadChildren: () => import('./components/calendar-modal/calendar-modal.module').then( m => m.CalendarModalPageModule)
+  },
 ];
 
 @NgModule({

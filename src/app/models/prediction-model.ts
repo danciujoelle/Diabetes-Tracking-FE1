@@ -7,8 +7,10 @@ export class PredictionModel {
     BMI: number;
     DiabetesPedigree: number;
     Age: number;
+    Diabetic: number;
+    UserId: string;
 
-    public constructor(pregnancies: number, plasmaGlucose: number, diastolicBloodPressure: number, tricepsThickness: number, serumInsulin: number, BMI: number, diabetesPedigree: number, age: number) {
+    public constructor(pregnancies: number, plasmaGlucose: number, diastolicBloodPressure: number, tricepsThickness: number, serumInsulin: number, BMI: number, diabetesPedigree: number, age: number, diabetic: number, userId: string) {
         this.Pregnancies = pregnancies;
         this.PlasmaGlucose = plasmaGlucose;
         this.DiastolicBloodPressure = diastolicBloodPressure;
@@ -17,5 +19,7 @@ export class PredictionModel {
         this.BMI = BMI;
         this.DiabetesPedigree = diabetesPedigree;
         this.Age = age;
+        this.Diabetic = diabetic;
+        this.UserId = userId;
     }
 }

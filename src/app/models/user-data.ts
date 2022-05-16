@@ -1,9 +1,9 @@
 export class UserData {
-    UserId: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    DateOfBirth: Date;
-    Username: string;
-    Password: string;
+    userId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: Date;
+    username: string;
+    password: string;
 }

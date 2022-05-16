@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PredictionModel } from 'src/app/models/prediction-model';
+import { PredictionService } from 'src/services/prediction.service';
 
 @Component({
   selector: 'app-predict-diabetes',
@@ -13,7 +15,7 @@ export class PredictDiabetesPage implements OnInit {
   predictionForm: FormGroup;
   isSubmitted: boolean;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private predictionService: PredictionService) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -33,6 +35,8 @@ export class PredictDiabetesPage implements OnInit {
       pedigreeFunction: ['', [Validators.required]],
       age: ['', [Validators.required]]
     })
+
+    console.log(this.userId);
   }
 
   get errorControl() {
@@ -45,8 +49,23 @@ export class PredictDiabetesPage implements OnInit {
       console.log("Please provide all the required values!")
       return false;
     } else {
-      console.log("suntem bine")
+      const bodyMassIndex = this.computeBMI(this.predictionForm.get('weight').value, this.predictionForm.get('height').value)
+      const pregnancies = this.predictionForm.get('pregnancies').value;
+      const glucose = this.predictionForm.get('glucose').value;
+      const bloodPressure = this.predictionForm.get('bloodPressure').value;
+      const skinThickness = this.predictionForm.get('skinThickness').value;
+      const insulin = this.predictionForm.get('insulin').value;
+      const pedigreeFunction = this.predictionForm.get('pedigreeFunction').value;
+      const age = this.predictionForm.get('age').value;
+      const dataToPredict = new PredictionModel(pregnancies, glucose, bloodPressure, skinThickness, insulin, bodyMassIndex, pedigreeFunction, age, 0, this.userId);
+      this.predictionService.addPrediction(dataToPredict).subscribe((data) => {
+        console.log(data);
+      })
       };
+    }
+
+    computeBMI(weight: number, height: number): number{
+      return weight/((height)^2);
     }
 }
 

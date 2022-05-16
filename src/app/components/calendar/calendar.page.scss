@@ -1,0 +1,100 @@
+ion-content {
+  --background: #1d1eb7;
+  border-left: 7px solid #ffde59;
+
+  .header {
+    padding: 0 5vw 0 12vw;
+    margin-top: 2em;
+    color: #fff;
+
+    h3 {
+      font-size: 1.1em;
+      color: #9d9bef;
+      span {
+        color: #fff;
+      }
+    }
+
+    h1 {
+      font-size: 2.2em;
+      font-weight: 400;
+    }
+
+    ion-buttons {
+      margin-top: 10px;
+      float: right;
+
+      ion-button {
+        border-radius: 12vw;
+        background-color: #9d9bef;
+      }
+    }
+  }
+
+  ion-segment {
+    margin-top: 30px;
+  }
+
+  .slide-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-button {
+      width: 50px;
+      border-radius: 12vw;
+      background-color: #9d9bef;
+    }
+  }
+
+  .remove-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    background-color: #1d1eb7;
+    --background: white;
+    border: none;
+    padding: 0;
+    --border: none;
+
+    ion-button {
+      border-radius: 12vw;
+      background-color: #9d9bef;
+    }
+  }
+
+  .indicator-container {
+    padding-left: 0.5rem;
+    padding-bottom: 0.4rem;
+  }
+}
+
+:host ::ng-deep {
+  .monthview-container {
+    height: 50% !important;
+  }
+
+  .event-detail-container {
+    background-color: #1d1eb7;
+    background: #1d1eb7;
+    padding: 12px;
+  }
+
+  .monthview-selected {
+    background-color: var(--ion-color-success) !important;
+  }
+
+  .event-indicator {
+    background: var(--ion-color-success);
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    display: table-cell;
+  }
+
+  .with-event {
+    background-color: var(--ion-color-primary);
+    border-radius: 15px;
+  }
+}
