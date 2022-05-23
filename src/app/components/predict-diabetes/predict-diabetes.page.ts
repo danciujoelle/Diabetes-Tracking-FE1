@@ -10,9 +10,9 @@ import { PredictionService } from 'src/services/prediction.service';
   styleUrls: ['./predict-diabetes.page.scss'],
 })
 export class PredictDiabetesPage implements OnInit {
-  private userId: string;
   predictionForm: FormGroup;
   isSubmitted: boolean;
+  private userId: string;
 
   constructor(
     private router: Router,

@@ -25,13 +25,6 @@ const routes: Routes = [
       import('./components/home/home.module').then((m) => m.HomePageModule),
   },
   {
-    path: 'diabetes-prediction',
-    loadChildren: () =>
-      import(
-        './components/diabetes-prediction/diabetes-prediction.module'
-      ).then((m) => m.DiabetesPredictionPageModule),
-  },
-  {
     path: 'predict-diabetes',
     loadChildren: () =>
       import('./components/predict-diabetes/predict-diabetes.module').then(
@@ -44,10 +37,6 @@ const routes: Routes = [
       import('./components/calendar/calendar.module').then(
         (m) => m.CalendarPageModule
       ),
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./components/menu/menu.module').then( m => m.MenuPageModule)
   },
 ];
 

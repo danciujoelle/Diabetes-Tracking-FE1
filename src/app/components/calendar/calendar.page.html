@@ -1,5 +1,8 @@
 <ion-content>
-  <div class="header">
+  <ion-item class="header">
+    <ion-menu-button menu="main-menu"></ion-menu-button>
+  </ion-item>
+  <div class="content">
     <h1>Track<br />Your Events</h1>
     <ion-buttons slot="end">
       <ion-button (click)="openEventForm()">
@@ -62,7 +65,7 @@
         doneText="OK"
         cancelText="Cancel"
         displayFormat="DD/MM/YYYY HH:mm"
-        pickerFOrmat="MMMM DHH:mm"
+        pickerFormat="MMMM DHH:mm"
         [(ngModel)]="newEvent.endTime"
         [min]="minDate"
       ></ion-datetime>
