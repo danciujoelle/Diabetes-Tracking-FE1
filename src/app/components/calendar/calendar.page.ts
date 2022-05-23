@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarComponent } from 'ionic2-calendar';
-import { CalendarModalPage } from '../calendar-modal/calendar-modal.page';
+import { CalendarMode } from 'ionic2-calendar/calendar';
+import { EventData } from 'src/app/models/event-data';
+import { EventModel } from 'src/app/models/event-model';
+import { EventService } from 'src/services/event.service';
 
 @Component({
   selector: 'app-calendar',
@@ -9,19 +12,48 @@ import { CalendarModalPage } from '../calendar-modal/calendar-modal.page';
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
-  eventSource = [];
+  private userId: string;
+  private responseData: Array<EventData> = new Array<EventData>();
+
+  allEvents = [];
+  myData = [
+    {
+      title: 'My first event',
+      description: 'My description is nice',
+      startTime: new Date(2022, 25, 20, 12, 11, 11),
+      endTime: new Date(2022, 5, 20, 12, 14, 11),
+    },
+  ];
   viewTitle: string;
   calendar = {
-    mode: 'month',
+    mode: 'month' as CalendarMode,
     currentDate: new Date(),
   };
   selectedDate: Date;
+  newEvent = {
+    title: '',
+    description: '',
+    startTime: '',
+    endTime: '',
+  };
+  showAddEvent: boolean;
 
-  @ViewChild(CalendarComponent) myCal: CalendarComponent;
+  @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private eventService: EventService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.userId = this.router.getCurrentNavigation().extras.state.userId;
+      }
+    });
+    this.getEvents();
+  }
 
   next(): void {
     this.myCal.slideNext();
@@ -31,46 +63,60 @@ export class CalendarPage implements OnInit {
     this.myCal.slidePrev();
   }
 
-  onViewTitleChanged(title): void {
+  onViewTitleChanged(title: string): void {
     this.viewTitle = title;
   }
 
-  removeEvents() {
-    this.eventSource = [];
+  onEventSelected(event): void {
+    this.newEvent = event;
   }
 
-  async openCalModal() {
-    const modal = await this.modalCtrl.create({
-      component: CalendarModalPage,
-      cssClass: 'cal-modal',
-      backdropDismiss: false,
-    });
+  removeEvents() {
+    this.allEvents = [];
+  }
 
-    await modal.present();
+  openEventForm(): void {
+    this.showAddEvent = !this.showAddEvent;
+    this.newEvent = {
+      title: '',
+      description: '',
+      startTime: new Date().toISOString(),
+      endTime: new Date().toISOString(),
+    };
+  }
 
-    modal.onDidDismiss().then((result) => {
-      if (result.data && result.data.event) {
-        let event = result.data.event;
-        if (event.allDay) {
-          let start = event.startTime;
-          event.startTime = new Date(
-            Date.UTC(
-              start.getUTCFullYear(),
-              start.getUTCMonth(),
-              start.getUTCDate()
-            )
-          );
-          event.endTime = new Date(
-            Date.UTC(
-              start.getUTCFullYear(),
-              start.getUTCMonth(),
-              start.getUTCDate() + 1
-            )
-          );
+  addEvent(): void {
+    this.eventService
+      .addAppointment(
+        new EventModel(
+          this.newEvent.title,
+          this.newEvent.description,
+          new Date(this.newEvent.startTime),
+          new Date(this.newEvent.endTime),
+          this.userId
+        )
+      )
+      .subscribe((data) => {
+        if (data.statusCode === 200) {
+          this.showAddEvent = false;
         }
-        this.eventSource.push(result.data.event);
-        this.myCal.loadEvents();
-      }
+      });
+    this.getEvents();
+  }
+
+  private getEvents(): void {
+    this.eventService.getAppointments(this.userId).subscribe((response) => {
+      this.allEvents = [];
+      this.responseData = response;
+      this.responseData.forEach((appointment: EventData) => {
+        this.allEvents.push({
+          title: appointment.title,
+          description: appointment.description,
+          startTime: new Date(appointment.startTime),
+          endTime: new Date(appointment.endTime),
+        });
+        console.log(this.allEvents);
+      });
     });
   }
 }

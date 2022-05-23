@@ -10,16 +10,20 @@ import { PredictionService } from 'src/services/prediction.service';
   styleUrls: ['./predict-diabetes.page.scss'],
 })
 export class PredictDiabetesPage implements OnInit {
-
   private userId: string;
   predictionForm: FormGroup;
   isSubmitted: boolean;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private predictionService: PredictionService) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private predictionService: PredictionService
+  ) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      if(this.router.getCurrentNavigation().extras.state) {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (this.router.getCurrentNavigation().extras.state) {
         this.userId = this.router.getCurrentNavigation().extras.state.userId;
       }
     });
@@ -33,39 +37,51 @@ export class PredictDiabetesPage implements OnInit {
       weight: ['', [Validators.required]],
       height: ['', [Validators.required]],
       pedigreeFunction: ['', [Validators.required]],
-      age: ['', [Validators.required]]
-    })
-
-    console.log(this.userId);
+      age: ['', [Validators.required]],
+    });
   }
 
   get errorControl() {
     return this.predictionForm.controls;
   }
 
-  onSubmit(){
+  onSubmit() {
     this.isSubmitted = true;
-    if(!this.predictionForm.valid){
-      console.log("Please provide all the required values!")
+    if (!this.predictionForm.valid) {
+      console.log('Please provide all the required values!');
       return false;
     } else {
-      const bodyMassIndex = this.computeBMI(this.predictionForm.get('weight').value, this.predictionForm.get('height').value)
+      const bodyMassIndex = this.computeBMI(
+        this.predictionForm.get('weight').value,
+        this.predictionForm.get('height').value
+      );
       const pregnancies = this.predictionForm.get('pregnancies').value;
       const glucose = this.predictionForm.get('glucose').value;
       const bloodPressure = this.predictionForm.get('bloodPressure').value;
       const skinThickness = this.predictionForm.get('skinThickness').value;
       const insulin = this.predictionForm.get('insulin').value;
-      const pedigreeFunction = this.predictionForm.get('pedigreeFunction').value;
+      const pedigreeFunction =
+        this.predictionForm.get('pedigreeFunction').value;
       const age = this.predictionForm.get('age').value;
-      const dataToPredict = new PredictionModel(pregnancies, glucose, bloodPressure, skinThickness, insulin, bodyMassIndex, pedigreeFunction, age, 0, this.userId);
+      const dataToPredict = new PredictionModel(
+        pregnancies,
+        glucose,
+        bloodPressure,
+        skinThickness,
+        insulin,
+        bodyMassIndex,
+        pedigreeFunction,
+        age,
+        0,
+        this.userId
+      );
       this.predictionService.addPrediction(dataToPredict).subscribe((data) => {
         console.log(data);
-      })
-      };
+      });
     }
+  }
 
-    computeBMI(weight: number, height: number): number{
-      return weight/((height)^2);
-    }
+  computeBMI(weight: number, height: number): number {
+    return weight / (height ^ 2);
+  }
 }
-

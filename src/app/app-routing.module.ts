@@ -5,42 +5,56 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./components/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./components/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'signup',
-    loadChildren: () => import('./components/signup/signup.module').then( m => m.SignupPageModule)
+    loadChildren: () =>
+      import('./components/signup/signup.module').then(
+        (m) => m.SignupPageModule
+      ),
   },
   {
     path: 'home',
-    loadChildren: () => import('./components/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () =>
+      import('./components/home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: 'diabetes-prediction',
-    loadChildren: () => import('./components/diabetes-prediction/diabetes-prediction.module').then( m => m.DiabetesPredictionPageModule)
+    loadChildren: () =>
+      import(
+        './components/diabetes-prediction/diabetes-prediction.module'
+      ).then((m) => m.DiabetesPredictionPageModule),
   },
   {
     path: 'predict-diabetes',
-    loadChildren: () => import('./components/predict-diabetes/predict-diabetes.module').then( m => m.PredictDiabetesPageModule)
+    loadChildren: () =>
+      import('./components/predict-diabetes/predict-diabetes.module').then(
+        (m) => m.PredictDiabetesPageModule
+      ),
   },
   {
     path: 'calendar',
-    loadChildren: () => import('./components/calendar/calendar.module').then( m => m.CalendarPageModule)
+    loadChildren: () =>
+      import('./components/calendar/calendar.module').then(
+        (m) => m.CalendarPageModule
+      ),
   },
   {
-    path: 'calendar-modal',
-    loadChildren: () => import('./components/calendar-modal/calendar-modal.module').then( m => m.CalendarModalPageModule)
+    path: 'menu',
+    loadChildren: () => import('./components/menu/menu.module').then( m => m.MenuPageModule)
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

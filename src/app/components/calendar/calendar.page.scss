@@ -47,20 +47,50 @@ ion-content {
     }
   }
 
-  .remove-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-    margin-bottom: 20px;
-    background-color: #1d1eb7;
-    --background: white;
-    border: none;
-    padding: 0;
-    --border: none;
+  .event-form {
+    margin-top: 90px;
 
-    ion-button {
-      border-radius: 12vw;
-      background-color: #9d9bef;
+    ion-row {
+      h3 {
+        font-size: 1.8em;
+        color: #9d9bef;
+        padding: 0 5vw 0 12vw;
+        margin-bottom: 20px;
+      }
+    }
+
+    ion-item {
+      --background: #1d1eb7;
+
+      ion-label {
+        margin-bottom: 8px;
+        font-size: 1.5em;
+        color: #9d9bef;
+      }
+
+      ion-input {
+        --background: #3534be;
+        height: 55px;
+        border-radius: 25px;
+        --placeholder-color: #9d9bef;
+      }
+
+      ion-datetime {
+        background-color: #3534be;
+        color: #9d9bef;
+        border-radius: 25px;
+      }
+    }
+
+    .add-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      background-color: #1d1eb7;
+      --background: #9d9bef;
+      border: none;
+      --border-radius: 25px;
+      height: 55px;
     }
   }
 
