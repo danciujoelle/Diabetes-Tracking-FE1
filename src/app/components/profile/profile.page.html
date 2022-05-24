@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">User Details</ion-title>
+    <ion-button slot="end" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="assets/joelle.jpg" class="center">
+  <h3 class="ion-text-center">{{userDetails.firstName}}</h3>
+  <ion-list>
+    <ion-item>
+      <ion-label slot="start">Username</ion-label>
+      <p slot="end">{{userDetails.username}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label slot="start">Email</ion-label>
+      <p slot="end">{{userDetails.email}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label slot="start">Date of Birth</ion-label>
+      <p slot="end">{{userDetails.dateOfBirth}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label slot="start">Has diabetes</ion-label>
+      <p slot="end">{{userDetails.hasDiabetes}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label slot="start">Diabetes Type</ion-label>
+      <p slot="end">{{userDetails.diabetesType}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label slot="start">Does it take insulin?</ion-label>
+      <p slot="end">{{userDetails.takesInsulin}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

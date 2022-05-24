@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { UserData } from 'src/app/models/user-data';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,14 @@ import { UserData } from 'src/app/models/user-data';
 export class HomePage implements OnInit {
   loggedUser: UserData;
   options;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
+    this.loggedUser = this.userService.userDetails;
     this.options = [
       {
         img: 'assets/imgs/predict_diabetes.png',
@@ -46,14 +52,5 @@ export class HomePage implements OnInit {
         this.loggedUser = this.router.getCurrentNavigation().extras.state.user;
       }
     });
-  }
-
-  goToPage(route: string): void {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        userId: this.loggedUser.userId,
-      },
-    };
-    this.router.navigate([route], navigationExtras);
   }
 }

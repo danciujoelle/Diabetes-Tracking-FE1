@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PredictionModel } from 'src/app/models/prediction-model';
 import { PredictionService } from 'src/services/prediction.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-predict-diabetes',
@@ -15,18 +16,13 @@ export class PredictDiabetesPage implements OnInit {
   private userId: string;
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private predictionService: PredictionService
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.userId = this.router.getCurrentNavigation().extras.state.userId;
-      }
-    });
+    this.userId = this.userService.userDetails.userId;
 
     this.predictionForm = this.formBuilder.group({
       pregnancies: ['', [Validators.required]],

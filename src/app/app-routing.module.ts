@@ -37,7 +37,11 @@ const routes: Routes = [
       import('./components/calendar/calendar.module').then(
         (m) => m.CalendarPageModule
       ),
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./components/profile/profile.module').then( m => m.ProfilePageModule)
   },
+
 ];
 
 @NgModule({

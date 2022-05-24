@@ -19,7 +19,7 @@
       <ion-label class="hello_label">Please log your data</ion-label>
       <ion-grid fixed>
         <ion-col size="6" *ngFor="let log of options">
-          <div class="col_div" (click)="goToPage(log.route)">
+          <div class="col_div" routerLink="{{log.route}}">
             <img src="{{log.img}}" />
             <ion-label>{{log.name}}</ion-label>
           </div>

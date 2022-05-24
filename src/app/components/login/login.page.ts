@@ -29,15 +29,21 @@ export class LoginPage implements OnInit {
     if(!this.loginForm.valid){
       this.loginForm.markAllAsTouched();
     }
-    this.userService.verifyUser(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value).subscribe((response) => {
-      let navigationExtras: NavigationExtras = {
-        state: {
-          user: response.userData
-        }
-      }
-      this.router.navigate(['/home'], navigationExtras);
-      this.loginForm.reset();
-    })
+    this.userService
+      .verifyUser(
+        this.loginForm.controls.username.value,
+        this.loginForm.controls.password.value
+      )
+      .subscribe((response) => {
+        this.userService.userDetails = response.userData;
+        const navigationExtras: NavigationExtras = {
+          state: {
+            user: response.userData,
+          },
+        };
+        this.router.navigate(['/home'], navigationExtras);
+        this.loginForm.reset();
+      });
   }
 
 }

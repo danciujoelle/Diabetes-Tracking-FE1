@@ -5,6 +5,7 @@ import { CalendarMode } from 'ionic2-calendar/calendar';
 import { EventData } from 'src/app/models/event-data';
 import { EventModel } from 'src/app/models/event-model';
 import { EventService } from 'src/services/event.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-calendar',
@@ -12,9 +13,7 @@ import { EventService } from 'src/services/event.service';
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
-  private userId: string;
-  private responseData: Array<EventData> = new Array<EventData>();
-
+  @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
   allEvents = [];
   myData = [
     {
@@ -38,20 +37,18 @@ export class CalendarPage implements OnInit {
   };
   showAddEvent: boolean;
 
-  @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
+  private userId: string;
+  private responseData: Array<EventData> = new Array<EventData>();
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.userId = this.router.getCurrentNavigation().extras.state.userId;
-      }
-    });
+    this.userId = this.userService.userDetails.userId;
     this.getEvents();
   }
 
