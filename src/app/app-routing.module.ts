@@ -41,6 +41,18 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./components/profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'glucose-log',
+    loadChildren: () => import('./components/glucose-log/glucose-log.module').then( m => m.GlucoseLogPageModule)
+  },
+  {
+    path: 'insulin-log',
+    loadChildren: () => import('./components/insulin-log/insulin-log.module').then( m => m.InsulinLogPageModule)
+  },
+  {
+    path: 'sport-log',
+    loadChildren: () => import('./components/sport-log/sport-log.module').then( m => m.SportLogPageModule)
+  },
 
 ];
 

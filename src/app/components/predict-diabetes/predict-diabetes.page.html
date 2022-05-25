@@ -14,7 +14,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.pregnancies.errors?.required"
+      *ngIf="pregFieldHasError()"
     >
       Number of pregnancies is required.
     </span>
@@ -26,7 +26,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.glucose.errors?.required"
+      *ngIf="bloodFieldHasError()"
     >
       Number of plasma glucose concentration is required.
     </span>
@@ -38,7 +38,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.bloodPressure.errors?.required"
+      *ngIf="bloodFieldHasError()"
     >
       Blood pressure is required.
     </span>
@@ -50,7 +50,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.skinThickness.errors?.required"
+      *ngIf="skinFieldHasError()"
     >
       Skin thickness is required.
     </span>
@@ -62,7 +62,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.insulin.errors?.required"
+      *ngIf="insulinFieldHasError()"
     >
       Insulin is required.
     </span>
@@ -74,7 +74,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.weight.errors?.required"
+      *ngIf="weightFieldHasError()"
     >
       Weight is required.
     </span>
@@ -86,7 +86,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.height.errors?.required"
+      *ngIf="heightFieldHasError()"
     >
       Height is required.
     </span>
@@ -98,7 +98,7 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.diabetesPedigreeFunction.errors?.required"
+      *ngIf="pedigreeFieldHasError()"
     >
       Diabetes pedigree function is required.
     </span>
@@ -110,13 +110,16 @@
     ></ion-input>
     <span
       class="error ion-padding"
-      *ngIf="isSubmitted && errorControl.age.errors?.required"
+      *ngIf="ageFieldHasError()"
     >
       Age is required.
     </span>
   </form>
-  <ion-button type="submit" (click)="onSubmit()">Predict</ion-button>
-  <div class="buttom">
-    <h3 routerLink="/login">Check normal values for the above parameters</h3>
-  </div>
+    <ion-button type="submit" *ngIf="!predictedResult" (click)="onSubmit()">Predict</ion-button>
+    <div class="buttom" *ngIf="!predictedResult">
+      <h3 routerLink="/login">Check normal values for the above parameters</h3>
+    </div>
+  <ion-item class="prediction-result" *ngIf="predictedResult">
+    <ion-label>{{predictedResult}}</ion-label>
+  </ion-item>
 </ion-content>

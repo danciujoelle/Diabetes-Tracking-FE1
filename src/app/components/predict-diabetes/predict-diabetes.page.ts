@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PredictionModel } from 'src/app/models/prediction-model';
 import { PredictionService } from 'src/services/prediction.service';
 import { UserService } from 'src/services/user.service';
@@ -13,6 +12,26 @@ import { UserService } from 'src/services/user.service';
 export class PredictDiabetesPage implements OnInit {
   predictionForm: FormGroup;
   isSubmitted: boolean;
+  predictedResult: string;
+  validationMessages = {
+    pregnancies: [
+      { type: 'required', message: 'Pregnancies field is required.' },
+    ],
+    glucose: [{ type: 'required', message: 'Glucose field is required.' }],
+    bloodPressure: [
+      { type: 'required', message: 'Blood pressure field is required.' },
+    ],
+    skinThickness: [
+      { type: 'required', message: 'Skin thickness field is required.' },
+    ],
+    insulin: [{ type: 'required', message: 'Insulin field is required.' }],
+    weight: [{ type: 'required', message: 'Weight field is required.' }],
+    height: [{ type: 'required', message: 'Height field is required.' }],
+    pedigreeFunction: [
+      { type: 'required', message: 'Pedigree function field is required.' },
+    ],
+    age: [{ type: 'required', message: 'Age field is required.' }],
+  };
   private userId: string;
 
   constructor(
@@ -20,6 +39,10 @@ export class PredictDiabetesPage implements OnInit {
     private formBuilder: FormBuilder,
     private predictionService: PredictionService
   ) {}
+
+  get errorControl() {
+    return this.predictionForm.controls;
+  }
 
   ngOnInit() {
     this.userId = this.userService.userDetails.userId;
@@ -35,10 +58,6 @@ export class PredictDiabetesPage implements OnInit {
       pedigreeFunction: ['', [Validators.required]],
       age: ['', [Validators.required]],
     });
-  }
-
-  get errorControl() {
-    return this.predictionForm.controls;
   }
 
   onSubmit() {
@@ -72,12 +91,66 @@ export class PredictDiabetesPage implements OnInit {
         this.userId
       );
       this.predictionService.addPrediction(dataToPredict).subscribe((data) => {
-        console.log(data);
+        console.log(data.message.result);
+        this.predictedResult = data.message.result;
       });
     }
   }
 
   computeBMI(weight: number, height: number): number {
     return weight / (height ^ 2);
+  }
+
+  pregFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('pregnancies').hasError('required') &&
+      this.isSubmitted
+    );
+  }
+
+  glucoseFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('glucose').hasError('required') &&
+      this.isSubmitted
+    );
+  }
+  bloodFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('bloodPressure').hasError('required') &&
+      this.isSubmitted
+    );
+  }
+  skinFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('skinThickness').hasError('required') &&
+      this.isSubmitted
+    );
+  }
+  insulinFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('insulin').hasError('required') &&
+      this.isSubmitted
+    );
+  }
+  heightFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('weight').hasError('required') && this.isSubmitted
+    );
+  }
+  weightFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('height').hasError('required') && this.isSubmitted
+    );
+  }
+  pedigreeFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('pedigreeFunction').hasError('required') &&
+      this.isSubmitted
+    );
+  }
+  ageFieldHasError(): boolean {
+    return (
+      this.predictionForm.get('age').hasError('required') && this.isSubmitted
+    );
   }
 }

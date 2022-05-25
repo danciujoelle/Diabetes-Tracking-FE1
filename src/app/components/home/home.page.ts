@@ -28,17 +28,17 @@ export class HomePage implements OnInit {
       {
         img: 'assets/imgs/glucose.png',
         name: 'Blood glucose tracker',
-        route: '/glucose-tracker',
+        route: '/glucose-log',
       },
       {
         img: 'assets/imgs/insulin.png',
         name: 'Insulin injection',
-        route: '/insulin-intake',
+        route: '/insulin-log',
       },
       {
         img: 'assets/imgs/sport.png',
         name: 'Log sport',
-        route: '/log-sport',
+        route: '/sport-log',
       },
       {
         img: 'assets/imgs/calendar.png',

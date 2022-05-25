@@ -1,0 +1,24 @@
+<ion-content>
+  <ion-item class="header">
+    <ion-menu-button menu="main-menu"></ion-menu-button>
+  </ion-item>
+  <div class="title-prediction">
+    <h1>Glucose<br>Log</h1>
+  </div>
+
+  <ion-list class="glucose-input">
+    <ion-label>Plasma Glucose Concentration</ion-label>
+    <ion-range min="0" max="200" pin="true" [(ngModel)]="glucoseLevel" color="secondary">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">200</ion-label>
+    </ion-range>
+    <ion-label>When was measured?</ion-label>
+    <ion-select placeholder="Select One">
+      <ion-select-option *ngFor="let option of whenWasMeasuredOptions" value="whenWasMeasured">{{option}}
+      </ion-select-option>
+    </ion-select>
+    <ion-label>Notes</ion-label>
+    <ion-textarea class="notes-input" rows="8"></ion-textarea>
+  </ion-list>
+  <ion-button (click)="onSubmit()">Log data</ion-button>
+</ion-content>
