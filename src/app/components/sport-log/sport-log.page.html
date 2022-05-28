@@ -5,5 +5,20 @@
   <div class="title-prediction">
     <h1>Sport<br>Log</h1>
   </div>
-
+  <ion-list class="sport-input">
+    <ion-label>Duration
+    </ion-label>
+    <ion-range min="0" max="200" pin="true" [(ngModel)]="duration" color="secondary">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">200 min</ion-label>
+    </ion-range>
+    <ion-label>Type of activity</ion-label>
+    <ion-select placeholder="Select One" [(ngModel)]="activity">
+      <ion-select-option *ngFor="let option of activityOptions" value="{{option.name}}">{{option.name}}
+      </ion-select-option>
+    </ion-select>
+    <ion-label>Notes</ion-label>
+    <ion-textarea [(ngModel)]="notes" class="notes-input" rows="8"></ion-textarea>
+  </ion-list>
+  <ion-button (click)="logData()">Log sport</ion-button>
 </ion-content>

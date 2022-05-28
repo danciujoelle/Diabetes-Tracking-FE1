@@ -4,13 +4,12 @@ ion-content {
 
   .header {
     --background: #1d1eb7;
-    color: beige;
+    color: beige;}
 
     ion-menu-button {
       background-color: #1d1eb7;
       border: none;
     }
-  }
 
   .title-prediction {
     padding: 0 12vw;
@@ -31,10 +30,10 @@ ion-content {
     }
   }
 
-  form {
+  .sport-input {
     padding: 0 12px;
-    margin-top: 20px;
-    --background: #3534be;
+    margin-top: 30px;
+    background: #1d1eb7;
     display: flex;
     flex-direction: column;
 
@@ -43,65 +42,23 @@ ion-content {
       color: #9d9bef;
     }
 
-    ion-input {
-      --background: #3534be;
+    .notes-input {
+      background: white;
       border-radius: 25px;
-      width: 95%;
-      --placeholder-color: #9d9bef;
-    }
-
-    .error {
-      color: red;
-      padding: 0;
+      margin-bottom: 30px;
     }
   }
 
   ion-button {
     width: 50vw;
-    --box-shadow: none;
-    box-shadow: none;
     background-color: #ffde59;
     --background: #ffde59;
-    margin-top: 30px;
-    padding: 20px;
+    --box-shadow: none;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     display: flex;
     align-items: center;
     font-size: 1.2rem;
     font-weight: 500;
-    justify-content: flex-end;
-  }
-
-  .buttom {
-    color: #fff;
-    padding: 0 12vw;
-    margin-top: 20px;
-    text-align: center;
-
-    h3 {
-      font-size: 1rem;
-      font-weight: 400;
-
-      span {
-        font-size: 1.2rem;
-        color: #ff987b;
-        font-weight: 500;
-      }
-    }
-  }
-
-  .submit-container {
-    --background: #1d1eb7;
-    display: flex;
-    flex-direction: row;
-  }
-
-  .prediction-result {
-    --background: #1d1eb7;
-
-    ion-label {
-      color: red;
-    }
   }
 }

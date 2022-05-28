@@ -5,5 +5,20 @@
   <div class="title-prediction">
     <h1>Insulin<br>Log</h1>
   </div>
+  <ion-list class="insulin-input">
+    <ion-label>Insulin Intake</ion-label>
+    <ion-range min="0" max="200" pin="true" [(ngModel)]="insulinIntake" color="secondary">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">200 muU/ml</ion-label>
+    </ion-range>
+    <ion-label>When was injected?</ion-label>
+    <ion-select placeholder="Select One" [(ngModel)]="whenWasInjected">
+      <ion-select-option *ngFor="let option of whenWasMeasuredOptions" value="{{option.name}}">{{option.name}}
+      </ion-select-option>
+    </ion-select>
+    <ion-label>Notes</ion-label>
+    <ion-textarea [(ngModel)]="notes" class="notes-input" rows="8"></ion-textarea>
+  </ion-list>
+  <ion-button (click)="logData()">Log data</ion-button>
 
 </ion-content>
