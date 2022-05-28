@@ -1,0 +1,14 @@
+<ion-content>
+  <div class="main_content_div">
+    <ion-buttons slot="start" class="menu_btn">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <div class="title-prediction">
+      <h1>Charts</h1>
+    </div>
+  </div>
+  <ion-label>Glucose variation for the last 2 months</ion-label>
+  <apx-chart [series]="glucose.series" [chart]="glucose.chart"></apx-chart>
+  <ion-label>Insulin injection for the last 2 months</ion-label>
+  <apx-chart [series]="insulin.series" [chart]="insulin.chart"></apx-chart>
+</ion-content>
