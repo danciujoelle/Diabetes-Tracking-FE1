@@ -13,12 +13,12 @@
       <ion-label slot="end">200</ion-label>
     </ion-range>
     <ion-label>When was measured?</ion-label>
-    <ion-select placeholder="Select One">
-      <ion-select-option *ngFor="let option of whenWasMeasuredOptions" value="whenWasMeasured">{{option}}
+    <ion-select placeholder="Select One" [(ngModel)]="whenWasMeasured">
+      <ion-select-option *ngFor="let option of whenWasMeasuredOptions" value="{{option.name}}">{{option.name}}
       </ion-select-option>
     </ion-select>
     <ion-label>Notes</ion-label>
-    <ion-textarea class="notes-input" rows="8"></ion-textarea>
+    <ion-textarea [(ngModel)]="notes" class="notes-input" rows="8"></ion-textarea>
   </ion-list>
-  <ion-button (click)="onSubmit()">Log data</ion-button>
+  <ion-button (click)="logData()">Log data</ion-button>
 </ion-content>

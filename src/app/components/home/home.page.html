@@ -9,14 +9,13 @@
         <ion-label class="welcome">Welcome</ion-label>
         <ion-label class="username">{{loggedUser.firstName}}</ion-label>
       </div>
-      <div
-        class="user_back"
-        [style.backgroundImage]="'url(assets/joelle.jpg)'"
-      ></div>
+      <div class="user_back">
+        <img src="assets/imgs/user.png" />
+      </div>
     </div>
 
     <div class="content_div animated bounceInUp">
-      <ion-label class="hello_label">Please log your data</ion-label>
+      <ion-label class="hello_label">Please log in your data</ion-label>
       <ion-grid fixed>
         <ion-col size="6" *ngFor="let log of options">
           <div class="col_div" routerLink="{{log.route}}">

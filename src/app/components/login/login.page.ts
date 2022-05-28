@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
+import { UserData } from 'src/app/models/user-data';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -9,24 +10,30 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   loginForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.userService.userDetails = new UserData();
     this.initForm();
   }
 
-  initForm(): void{
+  initForm(): void {
     this.loginForm = this.formBuilder.group({
-      username: new FormControl(null, {validators: [Validators.required]}),
-      password: new FormControl(null, {validators: [Validators.required, Validators.minLength(6)]})
+      username: new FormControl(null, { validators: [Validators.required] }),
+      password: new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(6)],
+      }),
     });
   }
 
-  onSubmit(): void{
-    if(!this.loginForm.valid){
+  onSubmit(): void {
+    if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
     }
     this.userService
@@ -45,5 +52,4 @@ export class LoginPage implements OnInit {
         this.loginForm.reset();
       });
   }
-
 }

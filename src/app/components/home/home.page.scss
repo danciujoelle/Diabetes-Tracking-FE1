@@ -17,7 +17,7 @@ ion-content {
 
         ion-label {
             display: block;
-            color: #9d9bef;
+            color: white;
             text-align: center;
         }
 
@@ -28,7 +28,7 @@ ion-content {
             background: #1d1eb7;
             display: flex;
             justify-content: space-between;
-    
+
             .first_div {
 
                 .welcome {
@@ -46,11 +46,6 @@ ion-content {
                 margin-right: 60px;
                 height: 100px;
                 width: 80px;
-                border: 3px solid #9d9bef;
-                background-position: top;
-                background-size: cover;
-                background-repeat: no-repeat;
-                border-radius: 7px;
             }
 
         }
@@ -63,8 +58,8 @@ ion-content {
             padding-top: 30px;
 
             .hello_label {
-                color: #ffde59;
-                font-weight: 600;
+                color: #1d1eb7;
+                font-weight: 400;
             }
 
             ion-grid {
@@ -105,20 +100,20 @@ ion-content {
     0%{
         opacity: 0;
         -webkit-transform: translateY(2000px);
-    } 
+    }
 
     60%{
         opacity: 1;
         -webkit-transform: translateY(-30px);
-    } 
+    }
 
     80%{
         -webkit-transform: translateY(10px);
-    } 
+    }
 
     100%{
         -webkit-transform: translateY(0px);
-    } 
+    }
 }
 
 .bounceInUp {
@@ -139,9 +134,9 @@ ion-content {
 
     80%{
         -webkit-transform: translateY(10px);
-    } 
+    }
 
     100%{
         -webkit-transform: translateY(0px);
-    } 
+    }
 }

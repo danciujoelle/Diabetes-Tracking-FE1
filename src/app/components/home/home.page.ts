@@ -21,12 +21,22 @@ export class HomePage implements OnInit {
     this.loggedUser = this.userService.userDetails;
     this.options = [
       {
-        img: 'assets/imgs/predict_diabetes.png',
+        img: 'assets/imgs/diabetes.png',
         name: 'Predict diabetes',
         route: '/predict-diabetes',
       },
       {
-        img: 'assets/imgs/glucose.png',
+        img: 'assets/imgs/report.png',
+        name: 'Log History',
+        route: '/history-logs',
+      },
+      {
+        img: 'assets/imgs/charts.png',
+        name: 'Charts',
+        route: '/charts',
+      },
+      {
+        img: 'assets/imgs/glucose-meter.png',
         name: 'Blood glucose tracker',
         route: '/glucose-log',
       },

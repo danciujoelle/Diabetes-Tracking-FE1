@@ -53,6 +53,14 @@ const routes: Routes = [
     path: 'sport-log',
     loadChildren: () => import('./components/sport-log/sport-log.module').then( m => m.SportLogPageModule)
   },
+  {
+    path: 'history-logs',
+    loadChildren: () => import('./components/history-logs/history-logs.module').then( m => m.HistoryLogsPageModule)
+  },
+  {
+    path: 'charts',
+    loadChildren: () => import('./components/charts/charts.module').then( m => m.ChartsPageModule)
+  },
 
 ];
 
