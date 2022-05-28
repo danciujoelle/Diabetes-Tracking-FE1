@@ -1,4 +1,7 @@
+import { getCurrencySymbol } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { InsulinLogModel } from 'src/app/models/insulin-log-model';
 import { LogData } from 'src/app/models/log-data';
 import { UserData } from 'src/app/models/user-data';
@@ -22,7 +25,9 @@ export class InsulinLogPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private insulinLogService: InsulinLogService
+    private insulinLogService: InsulinLogService,
+    private toastCtrl: ToastController,
+    private route: Router
   ) {}
 
   ngOnInit() {
@@ -37,7 +42,37 @@ export class InsulinLogPage implements OnInit {
       this.userDetails.userId
     );
     this.insulinLogService.addLog(log).subscribe((data) => {
-      console.log(data);
+      this.showSuccessToast();
+      this.route.navigate(['/home']);
     });
+  }
+
+  async showSuccessToast() {
+    await this.toastCtrl
+      .create({
+        message: 'You have successfully logged your insulin injection',
+        duration: 5000,
+        color: 'success',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
+  }
+
+  async showErrorToast(error: string) {
+    await this.toastCtrl
+      .create({
+        message: error,
+        color: 'danger',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
   }
 }

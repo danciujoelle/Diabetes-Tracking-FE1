@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { LogData } from 'src/app/models/log-data';
 import { SportLogModel } from 'src/app/models/sport-log-model';
 import { UserData } from 'src/app/models/user-data';
@@ -25,7 +27,9 @@ export class SportLogPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private sportLogService: SportLogService
+    private sportLogService: SportLogService,
+    private toastCtrl: ToastController,
+    private route: Router
   ) {}
 
   ngOnInit() {
@@ -39,8 +43,43 @@ export class SportLogPage implements OnInit {
       this.notes,
       this.userDetails.userId
     );
-    this.sportLogService.addLog(log).subscribe((data) => {
-      console.log(data);
-    });
+    this.sportLogService.addLog(log).subscribe(
+      (data) => {
+        this.showSuccessToast();
+        this.route.navigate(['/home']);
+      },
+      (error) => {
+        this.showErrorToast(error.message);
+      }
+    );
+  }
+
+  async showSuccessToast() {
+    await this.toastCtrl
+      .create({
+        message: 'You have successfully logged your activity',
+        duration: 5000,
+        color: 'success',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
+  }
+
+  async showErrorToast(error: string) {
+    await this.toastCtrl
+      .create({
+        message: error,
+        color: 'danger',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
   }
 }
