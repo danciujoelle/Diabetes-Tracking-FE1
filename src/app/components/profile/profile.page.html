@@ -10,27 +10,18 @@
       <img src="assets/imgs/user.png" />
     </div>
   </div>
-  <ion-list>
-      <ion-label>Username</ion-label>
-      <p>{{userDetails.username}}</p>
-      <ion-label>Email</ion-label>
-      <ion-input>{{userDetails.email}}</ion-input>
-      <ion-label>Date of Birth</ion-label>
-      <p>{{userDetails.dateOfBirth}}</p>
-      <ion-label>Has diabetes</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="hasDiabetes">
-        <ion-select-option *ngFor="let option of answers" value="{{option.name}}">{{option.name}}
-        </ion-select-option>
-      </ion-select>
-      <ion-label>Diabetes Type</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="diabetesType">
-        <ion-select-option *ngFor="let option of diabetesType" value="{{option.name}}">{{option.name}}
-        </ion-select-option>
-      </ion-select>
-      <ion-label>Does it take insulin?</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="takesInsulin">
-        <ion-select-option *ngFor="let option of answers" value="{{option.name}}">{{option.name}}
-        </ion-select-option>
-      </ion-select>
+  <ion-list class="profile-fields">
+    <ion-label position="relative">First Name</ion-label>
+    <ion-input type="text" placeholder="First Name" value="{{userDetails.firstName}}">
+    </ion-input>
+    <ion-label position="relative">Last Name</ion-label>
+    <ion-input type="text" placeholder="Last Name" value="{{userDetails.lastName}}">
+    </ion-input>
+    <ion-label position="relative">Email</ion-label>
+    <ion-input type="email" placeholder="Email" value="{{userDetails.email}}"></ion-input>
+    <ion-label position="relative">Date of Birth</ion-label>
+    <ion-input type="date" max="todayDate" value="{{userDetails.dateOfBirth}}"></ion-input>
+    <ion-label position="relative">Username</ion-label>
+    <ion-input type="text" placeholder="Username" value="{{userDetails.username}}"></ion-input>
   </ion-list>
 </ion-content>

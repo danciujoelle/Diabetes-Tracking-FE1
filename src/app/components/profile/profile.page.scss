@@ -42,25 +42,24 @@ ion-content {
     }
   }
 
-  ion-list {
-    padding: 0 12px;
+  .profile-fields {
     margin-top: 20px;
-    background: #3534be;
-    display: flex;
-    flex-direction: column;
+    background: #1d1eb7;
+    margin-left: 25px;
 
     ion-label {
-      font-size: 1.2em;
-      color: #9d9bef;
-      background: #3534be;
+      font-size: 1.1em;
+      color: white;
     }
 
-    ion-input,
-    p {
+    ion-input {
       --background: #3534be;
+      --padding-start: 33px;
+      height: 55px;
       border-radius: 25px;
-      width: 95%;
+      margin-bottom: 22px;
       --placeholder-color: #9d9bef;
+      --color: white;
     }
   }
 }

@@ -29,20 +29,16 @@ ion-content {
       font-weight: 400;
       color: white;
     }
-
-    ion-buttons {
-      margin-top: 10px;
-      float: right;
-
-      ion-button {
-        border-radius: 12vw;
-        background-color: #9d9bef;
-      }
-    }
   }
 
   ion-segment {
     margin-top: 30px;
+
+    ion-segment-button {
+      margin-top: 30px;
+      background-color: white;
+      border-radius: 25px;
+    }
   }
 
   .slide-buttons {
@@ -58,7 +54,7 @@ ion-content {
   }
 
   .event-form {
-    margin-top: 90px;
+    margin-top: 40px;
 
     ion-row {
       h3 {
@@ -86,7 +82,7 @@ ion-content {
       }
 
       ion-datetime {
-        background-color: #3534be;
+        background-color: white;
         color: #9d9bef;
         border-radius: 25px;
       }
@@ -97,7 +93,7 @@ ion-content {
       justify-content: center;
       margin-top: 15px;
       background-color: #1d1eb7;
-      --background: #9d9bef;
+      --background: white;
       border: none;
       --border-radius: 25px;
       height: 55px;
@@ -108,17 +104,40 @@ ion-content {
     padding-left: 0.5rem;
     padding-bottom: 0.4rem;
   }
+
+  ion-buttons {
+    display: flex;
+    margin-right:10px;
+    margin-bottom:20px;
+    justify-content: space-between;
+
+    ion-button {
+      margin-top: 20px;
+      width: 100px;
+      border-radius: 12vw;
+      background-color: white;
+    }
+
+    .close-button {
+      margin-top: 20px;
+    }
+  }
 }
 
 :host ::ng-deep {
   .monthview-container {
     height: 50% !important;
+    background-color: white;
   }
 
   .event-detail-container {
     background-color: #1d1eb7;
     background: #1d1eb7;
     padding: 12px;
+
+    .item {
+      border-radius: 25px;
+    }
   }
 
   .monthview-selected {

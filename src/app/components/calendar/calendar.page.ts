@@ -15,14 +15,6 @@ import { UserService } from 'src/services/user.service';
 export class CalendarPage implements OnInit {
   @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
   allEvents = [];
-  myData = [
-    {
-      title: 'My first event',
-      description: 'My description is nice',
-      startTime: new Date(2022, 25, 20, 12, 11, 11),
-      endTime: new Date(2022, 5, 20, 12, 14, 11),
-    },
-  ];
   viewTitle: string;
   calendar = {
     mode: 'month' as CalendarMode,
@@ -41,8 +33,6 @@ export class CalendarPage implements OnInit {
   private responseData: Array<EventData> = new Array<EventData>();
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private eventService: EventService,
     private userService: UserService
   ) {}
@@ -97,8 +87,8 @@ export class CalendarPage implements OnInit {
         if (data.statusCode === 200) {
           this.showAddEvent = false;
         }
+        this.getEvents();
       });
-    this.getEvents();
   }
 
   private getEvents(): void {

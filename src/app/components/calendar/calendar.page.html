@@ -4,12 +4,6 @@
   </ion-item>
   <div class="content">
     <h1>Track<br />Your Events</h1>
-    <ion-buttons slot="end">
-      <ion-button (click)="openEventForm()">
-        <ion-icon *ngIf="!showAddEvent" name="add" slot="icon-only"></ion-icon>
-        <ion-icon *ngIf="showAddEvent" name="close" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </div>
   <ion-segment [(ngModel)]="calendar.mode" *ngIf="!showAddEvent">
     <ion-segment-button value="month">
@@ -49,11 +43,9 @@
     <ion-item class="start-date-container">
       <ion-label position="stacked">Start Date</ion-label>
       <ion-datetime
-        color="white"
-        doneText="OK"
         cancelText="Cancel"
         displayFormat="DD/MM/YYYY HH:mm"
-        pickerFOrmat="MMMM DHH:mm"
+        pickerFormat="MMMM DHH:mm"
         [(ngModel)]="newEvent.startTime"
         [min]="minDate"
       ></ion-datetime>
@@ -62,7 +54,6 @@
     <ion-item class="end-date-container">
       <ion-label position="stacked">End Date</ion-label>
       <ion-datetime
-        doneText="OK"
         cancelText="Cancel"
         displayFormat="DD/MM/YYYY HH:mm"
         pickerFormat="MMMM DHH:mm"
@@ -104,11 +95,6 @@
     [currentDate]="calendar.currentDate"
     (onEventSelected)="onEventSelected($event)"
     (onTitleChanged)="onViewTitleChanged($event)"
-    startHour="00"
-    endHour="24"
-    step="30"
-    startingDayWeek="1"
-    [timeInterval]="30"
     [monthviewDisplayEventTemplate]="template"
   >
   </calendar>
@@ -123,4 +109,9 @@
       </div>
     </div>
   </ng-template>
+<ion-buttons>
+  <ion-button (click)="deleteEvent()" *ngIf="!showAddEvent">Remove</ion-button>
+  <ion-button (click)="openEventForm()" *ngIf="!showAddEvent">Add</ion-button>
+  <ion-button class="close-button" (click)="openEventForm()" *ngIf="showAddEvent">Close</ion-button>
+</ion-buttons>
 </ion-content>

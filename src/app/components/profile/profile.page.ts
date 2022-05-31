@@ -9,7 +9,10 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  diabetesType: LogData[] = [
+  hasDiabetes: string;
+  diabetesType: string;
+  takesInsulin: string;
+  diabetesTypes: LogData[] = [
     new LogData(0, 'Type 1'),
     new LogData(1, 'Type 2'),
   ];
