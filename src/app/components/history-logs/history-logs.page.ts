@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { GlucoseLogData } from 'src/app/models/glucose-log-data';
 import { InsulinLogData } from 'src/app/models/insulin-log-data';
 import { SportLogData } from 'src/app/models/sport-data';
@@ -17,11 +18,11 @@ export class HistoryLogsPage implements OnInit {
   isGlucoseHistory = true;
   isInsulinHistory = false;
   isSportHistory = false;
+  userDetails: UserData;
 
   private glucoseLogs: Array<GlucoseLogData> = new Array<GlucoseLogData>();
   private insulinLogs: Array<InsulinLogData> = new Array<InsulinLogData>();
   private sportLogs: Array<SportLogData> = new Array<SportLogData>();
-  private userDetails: UserData;
 
   constructor(
     private userService: UserService,
@@ -53,6 +54,10 @@ export class HistoryLogsPage implements OnInit {
     this.isInsulinHistory = false;
     this.isSportHistory = true;
     this.isGlucoseHistory = false;
+  }
+
+  getDateFormat(date: Date): string {
+    return moment(date).format('LLLL');
   }
 
   private setGlucoseLogs(): void {

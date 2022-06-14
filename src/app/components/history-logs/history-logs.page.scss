@@ -10,6 +10,7 @@ ion-content {
   ion-menu-button {
     background-color: #1d1eb7;
     border: none;
+    color: white;
   }
 
   .title-prediction {
@@ -40,12 +41,13 @@ ion-content {
 
     ion-button {
       border-radius: 25px;
-      --background: #1d13b7;
+      --background: #1d1eb7;
       background-color: #1d1eb7;
       color: #9d9bef;
       margin-bottom: 25px;
-      box-shadow: none;
+      --box-shadow: none;
       width: 75px;
+      font-size: 10px;
     }
   }
 
