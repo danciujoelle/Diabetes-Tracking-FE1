@@ -15,10 +15,28 @@
     </div>
 
     <div class="content_div animated bounceInUp">
-      <ion-label class="hello_label">Please log in your data</ion-label>
+      <ion-label
+        class="reminder-label"
+        *ngIf="glucoseReminder!=null||insulinReminder!=null"
+        >REMINDERS</ion-label
+      >
+      <ion-label class="reminder-label" *ngIf="glucoseReminder!=null">
+        {{glucoseReminder}}</ion-label
+      >
+      <ion-label
+        class="reminder-label"
+        *ngIf="insulinReminder!=null && userService.userDetails.diabetesType == 'Type 1'"
+      >
+        {{insulinReminder}}</ion-label
+      >
+      <ion-label class="hello_label">MENU</ion-label>
       <ion-grid fixed>
         <ion-col size="6" *ngFor="let log of options">
-          <div class="col_div" routerLink="{{log.route}}">
+          <div
+            class="col_div"
+            routerLink="{{log.route}}"
+            *ngIf="!(log.name=='Insulin Injection' && userService.userDetails.diabetesType == 'Type 1')"
+          >
             <img src="{{log.img}}" />
             <ion-label>{{log.name}}</ion-label>
           </div>
