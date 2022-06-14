@@ -28,4 +28,11 @@ export class InsulinLogService {
       this.httpHeader
     );
   }
+
+  needsReminder(userId: string): Observable<any> {
+    return this.http.get<any>(
+      this.apiUrl + `api/insulin/reminder/${userId}`,
+      this.httpHeader
+    );
+  }
 }

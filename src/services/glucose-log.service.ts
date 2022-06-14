@@ -28,4 +28,11 @@ export class GlucoseLogService {
       this.httpHeader
     );
   }
+
+  needsReminder(userId: string): Observable<any> {
+    return this.http.get<any>(
+      this.apiUrl + `api/glucose/reminder/${userId}`,
+      this.httpHeader
+    );
+  }
 }

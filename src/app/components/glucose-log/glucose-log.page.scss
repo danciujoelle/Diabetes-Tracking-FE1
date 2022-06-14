@@ -4,12 +4,14 @@ ion-content {
 
   .header {
     --background: #1d1eb7;
-    color: beige;}
+    color: beige;
+  }
 
-    ion-menu-button {
-      background-color: #1d1eb7;
-      border: none;
-    }
+  ion-menu-button {
+    background-color: #1d1eb7;
+    border: none;
+    color: white;
+  }
 
   .title-prediction {
     padding: 0 12vw;

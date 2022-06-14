@@ -41,10 +41,16 @@ export class InsulinLogPage implements OnInit {
       this.notes,
       this.userDetails.userId
     );
-    this.insulinLogService.addLog(log).subscribe((data) => {
-      this.showSuccessToast();
-      this.route.navigate(['/home']);
-    });
+    this.insulinLogService.addLog(log).subscribe(
+      (data) => {
+        this.showSuccessToast();
+        this.route.navigate(['/home']);
+        window.location.reload();
+      },
+      (err) => {
+        this.showErrorToast(err.error.message);
+      }
+    );
   }
 
   async showSuccessToast() {
@@ -74,5 +80,9 @@ export class InsulinLogPage implements OnInit {
         ],
       })
       .then((res) => res.present());
+  }
+
+  showButton(): boolean {
+    return this.insulinIntake != 0 && this.whenWasInjected != null;
   }
 }
