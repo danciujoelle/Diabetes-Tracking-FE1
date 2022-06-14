@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { UserData } from 'src/app/models/user-data';
 import { UserService } from 'src/services/user.service';
 
@@ -15,7 +21,8 @@ export class LoginPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -41,15 +48,34 @@ export class LoginPage implements OnInit {
         this.loginForm.controls.username.value,
         this.loginForm.controls.password.value
       )
-      .subscribe((response) => {
-        this.userService.userDetails = response.userData;
-        const navigationExtras: NavigationExtras = {
-          state: {
-            user: response.userData,
+      .subscribe(
+        (response) => {
+          this.userService.userDetails = response.userData;
+          const navigationExtras: NavigationExtras = {
+            state: {
+              user: response.userData,
+            },
+          };
+          this.router.navigate(['/home'], navigationExtras);
+          this.loginForm.reset();
+        },
+        (err) => {
+          this.showErrorToast(err.error.message);
+        }
+      );
+  }
+
+  async showErrorToast(error: string) {
+    await this.toastCtrl
+      .create({
+        message: error,
+        color: 'danger',
+        buttons: [
+          {
+            text: 'OK',
           },
-        };
-        this.router.navigate(['/home'], navigationExtras);
-        this.loginForm.reset();
-      });
+        ],
+      })
+      .then((res) => res.present());
   }
 }

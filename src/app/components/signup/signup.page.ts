@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { UserModel } from 'src/app/models/user-model';
 import { UserService } from 'src/services/user.service';
 
@@ -16,7 +17,8 @@ export class SignupPage implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private toastCtrl: ToastController
   ) {}
 
   get errorControl() {
@@ -50,8 +52,7 @@ export class SignupPage implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
     if (!this.submitForm.valid) {
-      console.log('Please provide all the required values!');
-      return false;
+      this.showErrorToast('Please provide all the required values!');
     } else {
       const user = new UserModel(
         this.submitForm.get('firstName').value,
@@ -59,13 +60,49 @@ export class SignupPage implements OnInit {
         this.submitForm.get('email').value,
         this.submitForm.get('dateOfBirth').value,
         this.submitForm.get('username').value,
-        this.submitForm.get('password').value
+        this.submitForm.get('password').value,
+        true,
+        'Type 2'
       );
-      this.userService.addUser(user).subscribe((data) => {
-        if (data.statusCode === 200) {
-          this.submitForm.reset();
+      this.userService.addUser(user).subscribe(
+        (data) => {
+          if (data.statusCode === 200) {
+            this.submitForm.reset();
+          }
+        },
+        (err) => {
+          this.showErrorToast(err.error.message);
         }
-      });
+      );
     }
+  }
+
+  async showSuccessToast() {
+    await this.toastCtrl
+      .create({
+        message: 'You have successfully logged your glucose level',
+        duration: 5000,
+        color: 'success',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
+  }
+
+  async showErrorToast(error: string) {
+    await this.toastCtrl
+      .create({
+        message: error,
+        color: 'danger',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
   }
 }

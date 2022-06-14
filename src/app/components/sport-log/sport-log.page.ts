@@ -48,8 +48,8 @@ export class SportLogPage implements OnInit {
         this.showSuccessToast();
         this.route.navigate(['/home']);
       },
-      (error) => {
-        this.showErrorToast(error.message);
+      (err) => {
+        this.showErrorToast(err.error.message);
       }
     );
   }
@@ -81,5 +81,9 @@ export class SportLogPage implements OnInit {
         ],
       })
       .then((res) => res.present());
+  }
+
+  showButton(): boolean {
+    return this.activity != null && this.duration != 0;
   }
 }
