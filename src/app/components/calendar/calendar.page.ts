@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { CalendarComponent } from 'ionic2-calendar';
 import { CalendarMode } from 'ionic2-calendar/calendar';
 import { EventData } from 'src/app/models/event-data';
@@ -23,7 +24,6 @@ export class CalendarPage implements OnInit {
   selectedDate: Date;
   newEvent = {
     title: '',
-    description: '',
     startTime: '',
     endTime: '',
   };
@@ -34,7 +34,8 @@ export class CalendarPage implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private userService: UserService
+    private userService: UserService,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -66,7 +67,6 @@ export class CalendarPage implements OnInit {
     this.showAddEvent = !this.showAddEvent;
     this.newEvent = {
       title: '',
-      description: '',
       startTime: new Date().toISOString(),
       endTime: new Date().toISOString(),
     };
@@ -77,7 +77,6 @@ export class CalendarPage implements OnInit {
       .addAppointment(
         new EventModel(
           this.newEvent.title,
-          this.newEvent.description,
           new Date(this.newEvent.startTime),
           new Date(this.newEvent.endTime),
           this.userId
@@ -86,24 +85,58 @@ export class CalendarPage implements OnInit {
       .subscribe((data) => {
         if (data.statusCode === 200) {
           this.showAddEvent = false;
+          this.showSuccessToast();
         }
         this.getEvents();
       });
   }
 
   private getEvents(): void {
-    this.eventService.getAppointments(this.userId).subscribe((response) => {
-      this.allEvents = [];
-      this.responseData = response;
-      this.responseData.forEach((appointment: EventData) => {
-        this.allEvents.push({
-          title: appointment.title,
-          description: appointment.description,
-          startTime: new Date(appointment.startTime),
-          endTime: new Date(appointment.endTime),
+    this.eventService.getAppointments(this.userId).subscribe(
+      (response) => {
+        this.allEvents = [];
+        this.responseData = response;
+        this.responseData.forEach((appointment: EventData) => {
+          this.allEvents.push({
+            title: appointment.title,
+            description: appointment.description,
+            startTime: new Date(appointment.startTime),
+            endTime: new Date(appointment.endTime),
+          });
         });
-        console.log(this.allEvents);
-      });
-    });
+      },
+      (err) => {
+        this.showErrorToast(err.error.message);
+      }
+    );
+  }
+
+  async showSuccessToast() {
+    await this.toastCtrl
+      .create({
+        message: 'You have successfully added an event',
+        duration: 5000,
+        color: 'success',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
+  }
+
+  async showErrorToast(error: string) {
+    await this.toastCtrl
+      .create({
+        message: error,
+        color: 'danger',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
   }
 }

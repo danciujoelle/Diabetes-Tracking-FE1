@@ -31,15 +31,6 @@
       ></ion-input>
     </ion-item>
 
-    <ion-item class="description-container">
-      <ion-label position="stacked">Description</ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="newEvent.description"
-        placeholder="Description"
-      ></ion-input>
-    </ion-item>
-
     <ion-item class="start-date-container">
       <ion-label position="stacked">Start Date</ion-label>
       <ion-datetime
@@ -109,9 +100,13 @@
       </div>
     </div>
   </ng-template>
-<ion-buttons>
-  <ion-button (click)="deleteEvent()" *ngIf="!showAddEvent">Remove</ion-button>
-  <ion-button (click)="openEventForm()" *ngIf="!showAddEvent">Add</ion-button>
-  <ion-button class="close-button" (click)="openEventForm()" *ngIf="showAddEvent">Close</ion-button>
-</ion-buttons>
+  <ion-buttons>
+    <ion-button (click)="openEventForm()" *ngIf="!showAddEvent">Add</ion-button>
+    <ion-button
+      class="close-button"
+      (click)="openEventForm()"
+      *ngIf="showAddEvent"
+      >Close</ion-button
+    >
+  </ion-buttons>
 </ion-content>

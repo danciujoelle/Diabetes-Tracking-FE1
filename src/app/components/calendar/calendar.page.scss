@@ -9,6 +9,7 @@ ion-content {
     ion-menu-button {
       background-color: #1d1eb7;
       border: none;
+      color: white;
     }
   }
   .content {
@@ -59,7 +60,7 @@ ion-content {
     ion-row {
       h3 {
         font-size: 1.8em;
-        color: #9d9bef;
+        color: white;
         padding: 0 5vw 0 12vw;
         margin-bottom: 20px;
       }
@@ -71,7 +72,7 @@ ion-content {
       ion-label {
         margin-bottom: 8px;
         font-size: 1.5em;
-        color: #9d9bef;
+        color: white;
       }
 
       ion-input {
@@ -79,6 +80,7 @@ ion-content {
         height: 55px;
         border-radius: 25px;
         --placeholder-color: #9d9bef;
+        color: white;
       }
 
       ion-datetime {
@@ -107,8 +109,9 @@ ion-content {
 
   ion-buttons {
     display: flex;
-    margin-right:10px;
-    margin-bottom:20px;
+    margin-top: 75px;
+    margin-right: 10px;
+    margin-bottom: 20px;
     justify-content: space-between;
 
     ion-button {
