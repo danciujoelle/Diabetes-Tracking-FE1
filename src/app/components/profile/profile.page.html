@@ -4,24 +4,96 @@
   </ion-item>
   <div class="user_div">
     <div class="first_div">
-      <h1>Your Profile<br>{{userDetails.firstName}}</h1>
+      <h1>Your Profile<br />{{userDetails.firstName}}</h1>
     </div>
     <div class="user_back">
       <img src="assets/imgs/user.png" />
     </div>
   </div>
-  <ion-list class="profile-fields">
+  <form
+    [formGroup]="updateUserForm"
+    class="profile-fields"
+    *ngIf="!isUpdatingPassword"
+  >
     <ion-label position="relative">First Name</ion-label>
-    <ion-input type="text" placeholder="First Name" value="{{userDetails.firstName}}">
+    <ion-input
+      disabled
+      type="text"
+      placeholder="First Name"
+      value="{{userDetails.firstName}}"
+    >
     </ion-input>
     <ion-label position="relative">Last Name</ion-label>
-    <ion-input type="text" placeholder="Last Name" value="{{userDetails.lastName}}">
+    <ion-input
+      disabled
+      type="text"
+      placeholder="Last Name"
+      value="{{userDetails.lastName}}"
+    >
     </ion-input>
     <ion-label position="relative">Email</ion-label>
-    <ion-input type="email" placeholder="Email" value="{{userDetails.email}}"></ion-input>
+    <ion-input
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+    ></ion-input>
     <ion-label position="relative">Date of Birth</ion-label>
-    <ion-input type="date" max="todayDate" value="{{userDetails.dateOfBirth}}"></ion-input>
+    <ion-input type="text" disabled value="{{dateOfBirth}}"></ion-input>
     <ion-label position="relative">Username</ion-label>
-    <ion-input type="text" placeholder="Username" value="{{userDetails.username}}"></ion-input>
-  </ion-list>
+    <ion-input
+      type="text"
+      placeholder="Username"
+      formControlName="username"
+    ></ion-input>
+    <ion-label position="relative">Has diabetes?</ion-label>
+    <ion-checkbox checked="true" formControlName="hasDiabetes"></ion-checkbox>
+    <ion-label position="relative">Diabetes Type</ion-label>
+    <ion-select placeholder="Select One" formControlName="diabetesType">
+      <ion-select-option
+        *ngFor="let option of diabetesTypes"
+        value="{{option.name}}"
+        >{{option.name}}
+      </ion-select-option>
+    </ion-select>
+  </form>
+  <form
+    [formGroup]="updatePasswordForm"
+    class="profile-fields"
+    *ngIf="isUpdatingPassword"
+  >
+    <ion-label position="relative">New Password</ion-label>
+    <ion-input
+      required
+      type="text"
+      placeholder="New Password"
+      formControlName="newPassword"
+    >
+    </ion-input>
+    <ion-label position="relative">Password to Verify</ion-label>
+    <ion-input
+      required
+      type="password"
+      placeholder="Password To Verify"
+      formControlName="verifiedNewPassword"
+    >
+    </ion-input>
+  </form>
+  <div class="update-button" (click)="updateUser()" *ngIf="!isUpdatingPassword">
+    Update Details
+  </div>
+  <div
+    class="update-button"
+    (click)="updatePasswordModal()"
+    *ngIf="!isUpdatingPassword"
+  >
+    Change Password
+  </div>
+  <div
+    class="update-button"
+    type="submit"
+    (click)="updatePassword()"
+    *ngIf="isUpdatingPassword"
+  >
+    Update
+  </div>
 </ion-content>

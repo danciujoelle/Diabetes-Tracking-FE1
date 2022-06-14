@@ -1,4 +1,5 @@
-export class UserModel {
+export class UpdateUserModel {
+  UserId: string;
   FirstName: string;
   LastName: string;
   Email: string;
@@ -9,6 +10,7 @@ export class UserModel {
   DiabetesType: string;
 
   public constructor(
+    userId: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -18,6 +20,7 @@ export class UserModel {
     hasDiabetes: boolean,
     diabetesType: string
   ) {
+    this.UserId = userId;
     this.FirstName = firstName;
     this.LastName = lastName;
     this.Email = email;
