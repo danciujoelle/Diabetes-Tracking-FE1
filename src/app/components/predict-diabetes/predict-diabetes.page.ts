@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { PredictionModel } from 'src/app/models/prediction-model';
 import { PredictionService } from 'src/services/prediction.service';
 import { UserService } from 'src/services/user.service';
@@ -37,7 +39,9 @@ export class PredictDiabetesPage implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private predictionService: PredictionService
+    private predictionService: PredictionService,
+    private toastCtrl: ToastController,
+    private route: Router
   ) {}
 
   get errorControl() {
@@ -90,10 +94,23 @@ export class PredictDiabetesPage implements OnInit {
         0,
         this.userId
       );
-      this.predictionService.addPrediction(dataToPredict).subscribe((data) => {
-        console.log(data.message.result);
-        this.predictedResult = data.message.result;
-      });
+      this.predictionService.addPrediction(dataToPredict).subscribe(
+        (data) => {
+          this.predictedResult = data.message.result;
+          if (this.predictedResult === 'You have been tested negative') {
+            this.showSuccessToast(this.predictedResult);
+          } else {
+            this.predictedResult =
+              this.predictedResult +
+              '. Please urgently add an appointment with your doctor';
+            this.showErrorToast(this.predictedResult);
+          }
+          this.route.navigate(['/home']);
+        },
+        (err) => {
+          this.showErrorToast(err.error.message);
+        }
+      );
     }
   }
 
@@ -152,5 +169,34 @@ export class PredictDiabetesPage implements OnInit {
     return (
       this.predictionForm.get('age').hasError('required') && this.isSubmitted
     );
+  }
+
+  async showSuccessToast(message: string) {
+    await this.toastCtrl
+      .create({
+        message: message,
+        duration: 5000,
+        color: 'success',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
+  }
+
+  async showErrorToast(error: string) {
+    await this.toastCtrl
+      .create({
+        message: error,
+        color: 'danger',
+        buttons: [
+          {
+            text: 'OK',
+          },
+        ],
+      })
+      .then((res) => res.present());
   }
 }
