@@ -80,7 +80,7 @@ export class SignupPage implements OnInit {
   async showSuccessToast() {
     await this.toastCtrl
       .create({
-        message: 'You have successfully logged your glucose level',
+        message: 'You have successfully created an account',
         duration: 5000,
         color: 'success',
         buttons: [

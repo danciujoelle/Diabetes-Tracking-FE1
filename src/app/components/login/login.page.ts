@@ -42,6 +42,7 @@ export class LoginPage implements OnInit {
   onSubmit(): void {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
+      this.showErrorToast('Both fields are required');
     }
     this.userService
       .verifyUser(

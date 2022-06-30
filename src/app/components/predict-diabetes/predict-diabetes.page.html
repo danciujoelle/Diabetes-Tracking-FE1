@@ -12,10 +12,7 @@
       type="number"
       placeholder="Pregnancies"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="pregFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="pregFieldHasError()">
       Number of pregnancies is required.
     </span>
     <ion-label position="relative">Glucose</ion-label>
@@ -24,10 +21,7 @@
       type="number"
       placeholder="Plasma glucose concentration"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="bloodFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="bloodFieldHasError()">
       Number of plasma glucose concentration is required.
     </span>
     <ion-label position="relative">Blood pressure</ion-label>
@@ -36,10 +30,7 @@
       type="number"
       placeholder="Diastolic blood pressure (mm Hg)"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="bloodFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="bloodFieldHasError()">
       Blood pressure is required.
     </span>
     <ion-label position="relative">Skin thickness</ion-label>
@@ -48,10 +39,7 @@
       type="number"
       placeholder="Triceps skin fold thickess (mm)"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="skinFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="skinFieldHasError()">
       Skin thickness is required.
     </span>
     <ion-label position="relative">Insulin</ion-label>
@@ -60,22 +48,16 @@
       type="number"
       placeholder="2-Hour serum insulin (muU/ml)"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="insulinFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="insulinFieldHasError()">
       Insulin is required.
     </span>
     <ion-label position="relative">Weight</ion-label>
     <ion-input
       formControlName="weight"
       type="number"
-      placeholder="Weigh in kg"
+      placeholder="Weight in kg"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="weightFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="weightFieldHasError()">
       Weight is required.
     </span>
     <ion-label position="relative">Height</ion-label>
@@ -84,10 +66,7 @@
       type="number"
       placeholder="Height in m"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="heightFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="heightFieldHasError()">
       Height is required.
     </span>
     <ion-label position="relative">Diabetes pedigree function</ion-label>
@@ -96,10 +75,7 @@
       type="number"
       placeholder="Diabetes pedigree function"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="pedigreeFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="pedigreeFieldHasError()">
       Diabetes pedigree function is required.
     </span>
     <ion-label position="relative">Age</ion-label>
@@ -108,17 +84,16 @@
       type="number"
       placeholder="Age"
     ></ion-input>
-    <span
-      class="error ion-padding"
-      *ngIf="ageFieldHasError()"
-    >
+    <span class="error ion-padding" *ngIf="ageFieldHasError()">
       Age is required.
     </span>
   </form>
-    <ion-button type="submit" *ngIf="!predictedResult" (click)="onSubmit()">Predict</ion-button>
-    <div class="buttom" *ngIf="!predictedResult">
-      <h3 routerLink="/login">Check normal values for the above parameters</h3>
-    </div>
+  <ion-button type="submit" *ngIf="!predictedResult" (click)="onSubmit()"
+    >Predict</ion-button
+  >
+  <div class="buttom" *ngIf="!predictedResult">
+    <h3 routerLink="/login">Check normal values for the above parameters</h3>
+  </div>
   <ion-item class="prediction-result" *ngIf="predictedResult">
     <ion-label>{{predictedResult}}</ion-label>
   </ion-item>
